@@ -1,26 +1,212 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ─── Jobber Foundation: Base palette (inlined to avoid @import url() conflict) ─── */
+
+  /* Surfaces (warm taupe family) */
+  --jb-surface: rgba(255, 255, 255, 1);
+  --jb-surface-bg: hsl(35, 20%, 97%);
+  --jb-surface-hover: hsl(43, 18%, 92%);
+  --jb-surface-active: hsl(40, 9%, 85%);
+  --jb-surface-reverse: hsl(197, 90%, 12%);
+
+  /* Text (blue-900 heading family) */
+  --jb-heading: hsl(197, 90%, 12%);
+  --jb-text: hsl(198, 35%, 21%);
+  --jb-text-secondary: hsl(197, 15%, 43%);
+  --jb-text-reverse: rgba(255, 255, 255, 1);
+
+  /* Interactive (Jobber green) */
+  --jb-interactive: hsl(107, 58%, 33%);
+  --jb-interactive-hover: hsl(107, 65%, 24%);
+
+  /* Borders (cool blue-grey) */
+  --jb-border: hsl(200, 13%, 87%);
+  --jb-border-interactive: hsl(196, 12%, 70%);
+
+  /* Focus */
+  --jb-focus: hsl(198, 12%, 57%);
+
+  /* Status: success */
+  --jb-success: hsl(107, 58%, 33%);
+  --jb-success-surface: hsl(109, 28%, 92%);
+  --jb-success-on-surface: hsl(107, 64%, 16%);
+
+  /* Status: warning */
+  --jb-warning: hsl(51, 64%, 49%);
+  --jb-warning-surface: hsl(52, 64%, 89%);
+  --jb-warning-on-surface: hsl(51, 64%, 24%);
+
+  /* Status: critical/destructive */
+  --jb-destructive: hsl(6, 64%, 51%);
+  --jb-destructive-hover: hsl(6, 100%, 35%);
+  --jb-destructive-surface: hsl(7, 63%, 95%);
+  --jb-destructive-on-surface: hsl(6, 100%, 24%);
+
+  /* Status: informative */
+  --jb-informative: hsl(207, 79%, 57%);
+  --jb-informative-surface: hsl(207, 87%, 94%);
+  --jb-informative-on-surface: hsl(207, 61%, 34%);
+
+  /* Workflow: quote */
+  --jb-quote: hsl(348, 40%, 41%);
+  --jb-quote-surface: hsl(347, 33%, 95%);
+
+  /* Workflow: job */
+  --jb-job: hsl(107, 58%, 33%);
+  --jb-job-surface: hsl(109, 28%, 92%);
+
+  /* Base green scale */
+  --jb-green-100: hsl(108, 29%, 97%);
+  --jb-green-200: hsl(109, 28%, 92%);
+
+  /* Base lightBlue */
+  --jb-lightblue-200: hsl(207, 87%, 94%);
+  --jb-lightblue-500: hsl(207, 79%, 57%);
+
+  /* Radius */
+  --radius-small: 4px;
+  --radius-base: 8px;
+  --radius-large: 16px;
+  --radius-larger: 24px;
+
+  /* Shadows */
+  --shadow-low: 0px 1px 2px rgba(0, 0, 0, 0.25), 0px 0px 2px rgba(0, 0, 0, 0.1);
+  --shadow-base: 0px 1px 4px 0px rgba(0, 0, 0, 0.1), 0px 4px 12px 0px rgba(0, 0, 0, 0.05);
+  --shadow-high: 0px 16px 16px 0px rgba(0, 0, 0, 0.075), 0px 0px 8px 0px rgba(0, 0, 0, 0.05);
+  --shadow-focus: 0px 0px 0px 2px var(--jb-surface), 0px 0px 0px 4px var(--jb-focus);
+
+  /* Spacing */
+  --space-small: 8px;
+  --space-slim: 12px;
+  --space-base: 16px;
+  --space-large: 24px;
+  --space-larger: 32px;
+
+  /* Timing */
+  --timing-base: 200ms;
+  --timing-slow: 300ms;
 }
 
+/* ─── Tailwind theme: map Jobber tokens to utility classes ─── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Surfaces */
+  --color-surface: var(--jb-surface);
+  --color-surface-bg: var(--jb-surface-bg);
+  --color-surface-hover: var(--jb-surface-hover);
+  --color-surface-active: var(--jb-surface-active);
+  --color-surface-reverse: var(--jb-surface-reverse);
+
+  /* Text */
+  --color-text-primary: var(--jb-heading);
+  --color-text-secondary: var(--jb-text-secondary);
+  --color-text-tertiary: var(--jb-focus);
+
+  /* Borders */
+  --color-border-subtle: var(--jb-border);
+  --color-border-default: var(--jb-border-interactive);
+
+  /* Interactive (Jobber green primary actions) */
+  --color-interactive: var(--jb-interactive);
+  --color-interactive-hover: var(--jb-interactive-hover);
+  --color-interactive-muted: var(--jb-success-surface);
+  --color-interactive-light: var(--jb-green-100);
+
+  /* Focus */
+  --color-focus: var(--jb-focus);
+
+  /* Status */
+  --color-success: var(--jb-success);
+  --color-success-surface: var(--jb-success-surface);
+  --color-warning: var(--jb-warning);
+  --color-warning-surface: var(--jb-warning-surface);
+  --color-destructive: var(--jb-destructive);
+  --color-destructive-surface: var(--jb-destructive-surface);
+  --color-informative: var(--jb-informative);
+  --color-informative-surface: var(--jb-informative-surface);
+
+  /* Workflow */
+  --color-quote: var(--jb-quote);
+  --color-quote-surface: var(--jb-quote-surface);
+
+  /* Typography */
+  --font-sans: Inter, Helvetica, Arial, sans-serif;
+  --font-display: 'Poppins', Helvetica, Arial, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ─── Base styles ─── */
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--jb-surface-bg);
+  color: var(--jb-text);
+  font-family: Inter, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Hide number spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] { -moz-appearance: textfield; }
+
+/* Focus: visible for interactive elements */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--jb-focus);
+  outline-offset: 2px;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Row actions: show on hover */
+.action-always-visible {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.group:hover .action-always-visible,
+.group\/row:hover .action-always-visible,
+.group:focus-within .action-always-visible,
+.group\/row:focus-within .action-always-visible,
+.action-always-visible:focus-visible {
+  opacity: 1;
+}
+
+/* Page enter */
+main {
+  animation: pageEnter var(--timing-slow) ease both;
+}
+
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(var(--space-slim)); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fadeSlideIn { animation: fadeSlideIn 0.35s ease both; }
+.animate-scaleIn { animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--jb-border-interactive) transparent;
 }
